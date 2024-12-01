@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إضافة خبر</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>موقع الأخبار</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">الرئيسية</a></li>
+                <li><a href="add-news.html">إضافة خبر</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>إضافة خبر جديد</h2>
+        <form id="newsForm">
+            <label for="title">عنوان الخبر</label>
+            <input type="text" id="title" required>
+            <label for="content">محتوى الخبر</label>
+            <textarea id="content" required></textarea>
+            <button type="submit">نشر الخبر</button>
+        </form>
+    </main>
+    <script>
+        document.getElementById('newsForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const title = document.getElementById('title').value;
+            const content = document.getElementById('content').value;
+            const news = JSON.parse(localStorage.getItem('news')) || [];
+            news.push({ title, content });
+            localStorage.setItem('news', JSON.stringify(news));
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>
